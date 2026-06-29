@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./src/images/icons8-calculator-16.ico">
-    <link href="./src/styles/styles.css" rel="stylesheet" type="text/css" />
+    <link href="./src/styles/styles.css" rel="stylesheet"/>
+    <script src="./src/script/script.js" defer></script>
     <title>Calculator</title>
 </head>
 
@@ -13,36 +14,40 @@
     <main class="container">
         <div class="calculator">
             <div class="calcTop">
-                <picture class="calcLogo"><img src="./src/images/logo.png" alt="alabama instruments logo"></picture>
+                <picture class="calcLogo">
+                    <img src="./src/images/logo.png" alt="alabama instruments logo">
+                </picture>
                 <input type="text" id="display" class="calcDisplay" disabled>
             </div>
             <div class="calcButtons">
-                <button class="buttonClear" onclick="clearDisplay()">&#8705</button>
+                <button class="buttonClear" data-action="clear">&#8705</button>
                 <div></div>
                 <div class="calcSolar">
-                    <picture><img src="./src/images/solar_panel.png"></picture>
+                    <picture>
+                        <img src="./src/images/solar_panel.png" alt="solar panel image">
+                    </picture>
                 </div>
                 <div></div>
 
-                <button class="buttonNum" onclick="selectNumber('7')">7</button>
-                <button class="buttonNum" onclick="selectNumber('8')">8</button>
-                <button class="buttonNum" onclick="selectNumber('9')">9</button>
-                <button class="buttonOperator" onclick="selectOperation('/')">&#xF7</button>
+                <button class="buttonNum" data-number="7" type="button">7</button>
+                <button class="buttonNum" data-number="8" type="button">8</button>
+                <button class="buttonNum" data-number="9" type="button">9</button>
+                <button class="buttonOperator" data-operator="/" type="button">&#xF7</button>
 
-                <button class="buttonNum" onclick="selectNumber('4')">4</button>
-                <button class="buttonNum" onclick="selectNumber('5')">5</button>
-                <button class="buttonNum" onclick="selectNumber('6')">6</button>
-                <button class="buttonOperator" onclick="selectOperation('*')">&#215</button>
+                <button class="buttonNum" data-number="4" type="button">4</button>
+                <button class="buttonNum" data-number="5" type="button">5</button>
+                <button class="buttonNum" data-number="6" type="button">6</button>
+                <button class="buttonOperator" data-operator="*" type="button">&#215</button>
 
-                <button class="buttonNum" onclick="selectNumber('1')">1</button>
-                <button class="buttonNum" onclick="selectNumber('2')">2</button>
-                <button class="buttonNum" onclick="selectNumber('3')">3</button>
-                <button class="buttonOperator" onclick="selectOperation('-')">&#8722</button>
+                <button class="buttonNum" data-number="1" type="button">1</button>
+                <button class="buttonNum" data-number="2" type="button">2</button>
+                <button class="buttonNum" data-number="3" type="button">3</button>
+                <button class="buttonOperator" data-operator="-" type="button">&#8722</button>
 
-                <button class="buttonNum" onclick="selectNumber('.')">&#8729</button>
-                <button class="buttonNum" onclick="selectNumber('0')">0</button>
-                <button class="buttonOperator" onclick="calculate()">&#61</button>
-                <button class="buttonOperator" onclick="selectOperation('+')">&#43</button>
+                <button class="buttonNum" data-action="decimal" type="button">&#8729</button>
+                <button class="buttonNum" data-number="0" type="button">0</button>
+                <button class="buttonOperator" data-action="equals" type="button">&#61</button>
+                <button class="buttonOperator" data-operator="+" type="button">&#43</button>
             </div>
         </div>
     </main>
