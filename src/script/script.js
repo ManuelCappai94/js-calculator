@@ -1,3 +1,5 @@
+import { initKeyboard } from "./keyboard_input.js"
+
 const calcButtons = document.querySelector(".calcButtons")
 
 let currentInput = ""
@@ -28,5 +30,5 @@ function initCalcDigits(){
     })
 }
 
-
+initKeyboard()
 initCalcDigits()
