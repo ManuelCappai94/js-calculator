@@ -70,7 +70,12 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-
+function clearDisplay(){
+    currentInput = '';
+    previousInput = '';
+    currentOperation = '';
+    document.getElementById('display').value ='';
+}
 
 
 initKeyboard()
