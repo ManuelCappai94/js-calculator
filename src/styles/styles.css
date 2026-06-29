@@ -22,3 +22,16 @@
     border-radius: 10px;
     color: #fff;
 }
+
+.button:hover{
+    background-color: #0288d1;
+    transform: scale(1.1);
+}
+
+.button:active{
+    transform: scale(0.95);
+}
+
+.button.clear:hover{
+    background-color: #e64a19;
+}
