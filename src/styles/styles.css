@@ -106,20 +106,3 @@
 .buttonOperator:active {
     transform: scale(0.95);
 }
-
-.buttonEqual {
-    background-color: #cf2c0c;
-    border-color: transparent;
-    font-size: 1.5rem;
-    border-radius: 10px;
-    color: #fff;
-}
-
-.buttonEqual:hover {
-    background-color: #fd350e;
-    transform: scale(1.1);
-}
-
-.buttonEqual:active {
-    transform: scale(0.95);
-}
