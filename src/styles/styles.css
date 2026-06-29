@@ -9,7 +9,7 @@
 .calculator {
     display: flex;
     flex-direction:column;
-    width: auto;
+    width: 20%;
     background-color: #040308;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -30,7 +30,7 @@
 
 .calcDisplay {
     background-color: #cfe2e6;
-    width: auto;
+    width: 100%;
     height: 50px;
     margin-left: auto;
     text-align: right;
@@ -87,6 +87,7 @@
 .buttonOperator {
     background-color: #65686f;
     border-color: transparent;
+    border-radius: 10px;
     font-size: 1.5rem;
     color: #fff;
 }
