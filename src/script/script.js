@@ -70,7 +70,7 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-function clearDisplay(){
+function clearCalculatorDisplay(){
     currentInput = '';
     previousInput = '';
     currentOperation = '';
