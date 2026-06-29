@@ -4,36 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./src/images/icons8-calculator-16.ico">
     <link href="./src/styles/styles.css" rel="stylesheet" type="text/css" />
     <title>Calculator</title>
 </head>
 
 <body>
-    <div class="calculator">
-        <input type="text" id="display" class="display" disabled>
-        <div class="calcButtons">
-            <button class="buttonClear" onclick="clearDisplay()">C</button>
-            <button class="buttonOperator" onclick="appendOperation('/')">/</button>
-            <button class="buttonOperator" onclick="appendOperation('*')">*</button>
-            <button class="buttonOperator" onclick="appendOperation('-')">-</button>
+    <main class="container">
+        <div class="calculator">
+            <picture class="calcLogo"><img src="./src/images/logo.png" alt="alabama instruments logo"></picture>
+            <input type="text" id="display" class="calcDisplay" disabled>
+            <div class="calcButtons">
+                <button class="buttonClear" onclick="clearDisplay()">C</button>
+                <button class="buttonOperator" onclick="appendOperation('/')">&#xF7</button>
+                <button class="buttonOperator" onclick="appendOperation('*')">&#215</button>
+                <button class="buttonOperator" onclick="appendOperation('-')">&#8722</button>
 
 
 
-            <button class="buttonNum" onclick="appendNumber('7')">7</button>
-            <button class="buttonNum" onclick="appendNumber('8')">8</button>
-            <button class="buttonNum" onclick="appendNumber('9')">9</button>
-            <button class="buttonOperator" onclick="appendOperation('+')">+</button>
+                <button class="buttonNum" onclick="appendNumber('7')">7</button>
+                <button class="buttonNum" onclick="appendNumber('8')">8</button>
+                <button class="buttonNum" onclick="appendNumber('9')">9</button>
+                <button class="buttonOperator" onclick="appendOperation('+')">&#43</button>
 
-            <button class="buttonNum" onclick="appendNumber('4')">4</button>
-            <button class="buttonNum" onclick="appendNumber('5')">5</button>
-            <button class="buttonNum" onclick="appendNumber('6')">6</button>
-            <button class="button equal" onclick="calculate()">=</button>
+                <button class="buttonNum" onclick="appendNumber('4')">4</button>
+                <button class="buttonNum" onclick="appendNumber('5')">5</button>
+                <button class="buttonNum" onclick="appendNumber('6')">6</button>
+                <button class="buttonEqual" onclick="calculate()">=</button>
 
-            <button class="buttonNum" onclick="appendNumber('1')">1</button>
-            <button class="buttonNum" onclick="appendNumber('2')">2</button>
-            <button class="buttonNum" onclick="appendNumber('3')">3</button>
+                <button class="buttonNum" onclick="appendNumber('1')">1</button>
+                <button class="buttonNum" onclick="appendNumber('2')">2</button>
+                <button class="buttonNum" onclick="appendNumber('3')">3</button>
+            </div>
         </div>
-    </div>
+    </main>
 </body>
 
 </html>
