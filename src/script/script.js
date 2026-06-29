@@ -26,156 +26,48 @@ function divide(num1, num2) {
   return num1 / num2;
 }
 
-<<<<<<< HEAD
-const SNARKY_DIVIDE_BY_ZERO = "Can't divide by 0.";
-
-function operate(operator, num1, num2) {
-  switch (operator) {
-    case "+": return add(num1, num2);
-    case "-": return subtract(num1, num2);
-    case "*": return multiply(num1, num2);
-    case "/":
-      if (num2 === 0) return "ERROR"; // sentinel, handled by caller
-      return divide(num1, num2);
-    default: return num2;
-  }
-}
-
-// Round off floating point noise, and keep the string short enough not to overflow the display.
-function formatResult(n) {
-  if (!isFinite(n)) return "ERROR";
-
-  let rounded = Math.round((n + Number.EPSILON) * 1e9) / 1e9;
-  let str = String(rounded);
-
-  const digitCount = str.replace("-", "").replace(".", "").length;
-  if (digitCount > 12) {
-    if (Math.abs(rounded) >= 1e9 || (Math.abs(rounded) < 1e-6 && rounded !== 0)) {
-      str = rounded.toExponential(4);
-    } else {
-      str = String(Number(rounded.toPrecision(10)));
-    }
-  }
-  return str;
-}
-
-function updateDisplay(value) {
-  if (display) display.value = value;
-  console.log(value);
-}
-
-function enableDecimalButton() {
-  if (decimalBtn) decimalBtn.disabled = false;
-}
-
-function disableDecimalButton() {
-  if (decimalBtn) decimalBtn.disabled = true;
-}
-
-function resetCalculator() {
-  calcuator.firstOperand = null;
-  calcuator.operator = null;
-  calcuator.waitingForSecondOperand = false;
-  calcuator.hasError = false;
-  currentInput = "";
-  enableDecimalButton();
-  updateDisplay("0");
-}
-
+//mouse-click event listeners
 function initCalcDigits() {
-  calcButtons.addEventListener("click", (e) => {
-    const digit = e.target.closest("[data-number]");
-    const operator = e.target.closest("[data-operator]");
-    const actionBtn = e.target.closest("[data-action]");
+    calcButtons.addEventListener("click", (e) => {
+        const digit = e.target.closest("[data-number]")
+        const operator = e.target.closest("[data-operator]")
+        const actionBtns = e.target.closest("[data-action]")
 
-    // If we're in an error state, any press except "clear" resets first.
-    if (calcuator.hasError && !(actionBtn && actionBtn.dataset.action === "clear")) {
-      resetCalculator();
-    }
-
-    if (digit) {
-      currentInput += digit.dataset.number;
-      updateDisplay(currentInput);
-      return;
-    }
-
-    if (operator) {
-      if (currentInput === "" && calcuator.firstOperand === null) return;
-
-      if (calcuator.firstOperand === null) {
-        calcuator.firstOperand = Number(currentInput);
-      } else if (currentInput !== "") {
-        const secondOperand = Number(currentInput);
-        const result = operate(calcuator.operator, calcuator.firstOperand, secondOperand);
-
-        if (result === "ERROR") {
-          updateDisplay(SNARKY_DIVIDE_BY_ZERO);
-          calcuator.hasError = true;
-          return;
+        //   if(!digit)return
+        //   console.log(digit.dataset.number, operator.dataset.operator)
+        if (digit) {
+            // console.log(digit.dataset.number)
+            currentInput += digit.dataset.number
+            console.log(currentInput)
+            return
+        }
+        if (operator) {
+            console.log(operator.dataset.operator)
+            return
+        }
+        if (actionBtns) {
+            console.log(actionBtns.dataset.action)
+            return
         }
 
-        const displayValue = formatResult(result);
-        calcuator.firstOperand = Number(displayValue);
-        updateDisplay(displayValue);
-      }
+        if (actionBtns) {
+            switch (actionBtns.dataset.action) {
+                case "decimal":
+                    addDecimal();
+                    break;
 
-      calcuator.operator = operator.dataset.operator;
-      currentInput = "";
-      calcuator.waitingForSecondOperand = true;
-      enableDecimalButton();
-      return;
-    }
+                case "clear":
+                    clearCalculatorDisplay();
+                    break;
+                case undo:
+                    break;
+            }
 
-    if (actionBtn && actionBtn.dataset.action === "equals") {
-      if (calcuator.operator === null || currentInput === "") return;
-
-      const secondOperand = Number(currentInput);
-      const result = operate(calcuator.operator, calcuator.firstOperand, secondOperand);
-
-      if (result === "ERROR") {
-        updateDisplay(SNARKY_DIVIDE_BY_ZERO);
-        calcuator.hasError = true;
-        return;
-      }
-
-      const displayValue = formatResult(result);
-      updateDisplay(displayValue);
-
-      calcuator.firstOperand = Number(displayValue);
-      calcuator.operator = null;
-      calcuator.waitingForSecondOperand = false;
-      currentInput = "";
-      enableDecimalButton();
-      return;
-    }
-
-    if (actionBtn && actionBtn.dataset.action === "clear") {
-      resetCalculator();
-      return;
-    }
-
-    if (actionBtn && actionBtn.dataset.action === "decimal") {
-      if (currentInput.includes(".")) return;
-      currentInput += currentInput === "" ? "0." : ".";
-      disableDecimalButton();
-      updateDisplay(currentInput);
-      return;
-    }
-
-    if (actionBtn && actionBtn.dataset.action === "undo") {
-      currentInput = currentInput.slice(0, -1);
-
-      if (!currentInput.includes(".")) enableDecimalButton();
-
-      updateDisplay(currentInput === "" ? "0" : currentInput);
-      return;
-    }
-  });
+            return;
+        }
+    })
 }
 
-initKeyboard();
-initCalcDigits();
-=======
 //keyboard event listeners
 document.addEventListener("keydown", function (event) {
 
@@ -185,45 +77,64 @@ document.addEventListener("keydown", function (event) {
     }
 
     if (event.key === "+") {
-        document.querySelector('[data-operator="+"]').click();
+        document.querySelector('[data-action="+"]').click();
     }
 
-        if (event.key === "-") {
-        document.querySelector('[data-operator="-"]').click();
+    if (event.key === "-") {
+        document.querySelector('[data-action="-"]').click();
     }
 
-        if (event.key === "*") {
-        document.querySelector('[data-operator="*]').click();
+    if (event.key === "*") {
+        document.querySelector('[data-action="*"]').click();
     }
 
-        if (event.key === "/") {
-        document.querySelector('[data-operator="/"]').click();
+    if (event.key === "/") {
+        document.querySelector('[data-action="/"]').click();
     }
 
     //Enter = equals
-    if(event.key === "Enter"){
-        document.querySelector('[data-operator="equals"]').click();
+    if (event.key === "Enter") {
+        document.querySelector('[data-action="equals"]').click();
+    }
+
+    if(event.key === "."){
+        document.querySelector('[data-action="."]').click();
     }
 
     // Backspace = undo
-    if(event.key === "Backspace"){
-        document.querySelector('[data-operator="undo"]').click();
+    if (event.key === "Backspace") {
+        document.querySelector('[data-action="undo"]').click();
     }
 
     //Escape = clear
-    if(event.key === "Escape"){
-        doctype.querySelector('[data-action]="clear').click();
+    if (event.key === "Escape") {
+        document.querySelector('[data-action="clear"]').click();
     }
 });
 
-function clearCalculatorDisplay(){
+//decimal numbers
+function addDecimal() {
+    if (currentInput === "") {
+        currentInput = "0.";
+    }
+    else if (!currentInput.includes(".")) {
+        currentInput += ".";
+    }
+
+    display.value = currentInput;
+}
+
+//To clear the calculator
+function clearCalculatorDisplay() {
     currentInput = '';
     previousInput = '';
     currentOperation = '';
-    document.getElementById('display').value ='';
+    document.getElementById('display').value = '';
 }
 
+if (calcButtons.dataset.action === "clear") {
+    clearCalculatorDisplay();
+}
 
 initKeyboard()
 initCalcDigits()
->>>>>>> 60b26fb40e7c30198d9a97df55aab637336780b6
