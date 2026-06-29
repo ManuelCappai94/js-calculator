@@ -19,28 +19,30 @@
             <div class="calcButtons">
                 <button class="buttonClear" onclick="clearDisplay()">&#8705</button>
                 <div></div>
+                <div class="calcSolar">
+                    <picture><img src="./src/images/solar_panel.png"></picture>
+                </div>
                 <div></div>
-                <div></div>
 
-                <button class="buttonNum" onclick="appendNumber('7')">7</button>
-                <button class="buttonNum" onclick="appendNumber('8')">8</button>
-                <button class="buttonNum" onclick="appendNumber('9')">9</button>
-                <button class="buttonOperator" onclick="appendOperation('/')">&#xF7</button>
+                <button class="buttonNum" onclick="selectNumber('7')">7</button>
+                <button class="buttonNum" onclick="selectNumber('8')">8</button>
+                <button class="buttonNum" onclick="selectNumber('9')">9</button>
+                <button class="buttonOperator" onclick="selectOperation('/')">&#xF7</button>
 
-                <button class="buttonNum" onclick="appendNumber('4')">4</button>
-                <button class="buttonNum" onclick="appendNumber('5')">5</button>
-                <button class="buttonNum" onclick="appendNumber('6')">6</button>
-                <button class="buttonOperator" onclick="appendOperation('*')">&#215</button>
+                <button class="buttonNum" onclick="selectNumber('4')">4</button>
+                <button class="buttonNum" onclick="selectNumber('5')">5</button>
+                <button class="buttonNum" onclick="selectNumber('6')">6</button>
+                <button class="buttonOperator" onclick="selectOperation('*')">&#215</button>
 
-                <button class="buttonNum" onclick="appendNumber('1')">1</button>
-                <button class="buttonNum" onclick="appendNumber('2')">2</button>
-                <button class="buttonNum" onclick="appendNumber('3')">3</button>
-                <button class="buttonOperator" onclick="appendOperation('-')">&#8722</button>
+                <button class="buttonNum" onclick="selectNumber('1')">1</button>
+                <button class="buttonNum" onclick="selectNumber('2')">2</button>
+                <button class="buttonNum" onclick="selectNumber('3')">3</button>
+                <button class="buttonOperator" onclick="selectOperation('-')">&#8722</button>
 
-                <button class="buttonNum" onclick="appendOperation('.')">&#8729</button>
-                <button class="buttonNum" onclick="appendNumber('0')">0</button>
+                <button class="FbuttonNum" onclick="selectNumber('.')">&#8729</button>
+                <button class="buttonNum" onclick="selectNumber('0')">0</button>
                 <button class="buttonEqual" onclick="calculate()">&#61</button>
-                <button class="buttonOperator" onclick="appendOperation('+')">&#43</button>
+                <button class="buttonOperator" onclick="selectOperation('+')">&#43</button>
             </div>
         </div>
     </main>
