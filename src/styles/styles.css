@@ -1,19 +1,20 @@
 .calculator {
     width: 300px;
-    background-color: aquamarine;
+    background-color: #040308;
     border-radius: 15px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 20px;
 }
 
-.buttons {
+.calcButtons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
-.button {
-    background-color: #03a9f4;
+.buttonNum {
+
+    background-color: #26252a;
     border: none;
     font-size: 1.5rem;
     padding: 20px;
@@ -23,15 +24,22 @@
     color: #fff;
 }
 
-.button:hover{
-    background-color: #0288d1;
+.buttonNum:hover {
+    background-color: #2c2b2f;
     transform: scale(1.1);
 }
 
-.button:active{
+.buttonNum:active {
     transform: scale(0.95);
 }
 
-.button.clear:hover{
-    background-color: #e64a19;
+.buttonNum.clear {
+    background-color: #575965;
+
+
+}
+
+
+.buttonNum.clear:hover {
+    background-color: #7b7d85;
 }
