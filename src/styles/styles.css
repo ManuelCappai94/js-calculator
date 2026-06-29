@@ -43,13 +43,32 @@
     border-radius: 10px;
     box-sizing: border-box;
     min-width: 0;
-    overflow-x: hidden;
+    overflow-x: scroll;
     white-space: nowrap;
 }
 
-.calcSolar img {
-    width: 200%;
-    object-fit: contain;
+.calcScroll {
+    display: flex;
+    gap: 5px;
+}
+
+.scrollBtn {
+    background-color: #26252a;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.scrollBtn:hover {
+    background-color: #5d5b62;
+}
+
+.scrollBtn:active {
+    transform: scale(0.9);
 }
 
 .calcButtons {
@@ -111,4 +130,12 @@
 
 .buttonOperator:active {
     transform: scale(0.95);
+}
+
+.calcDisplay.errorMessage {
+    text-align: left;
+    font-size: 0.5rem;
+    letter-spacing: -0.02em;
+    object-fit: cover;
+
 }

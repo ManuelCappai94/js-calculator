@@ -59,6 +59,7 @@ function formatResult(n) {
   return str;
 }
 
+
 function updateDisplay(value) {
   if (display) {
     display.value = String(value);
@@ -178,53 +179,76 @@ function initCalcDigits() {
   });
 }
 
-//keyboard event listeners
+function initScrollButtons() {
+  document.addEventListener("click", (e) => {
+    const scrollBtn = e.target.closest("[data-scroll]");
+    if (!scrollBtn || !display) return;
+
+    const amount = 40; // pixels per click, tune to taste
+    if (scrollBtn.dataset.scroll === "left") {
+      display.scrollLeft -= amount;
+    } else if (scrollBtn.dataset.scroll === "right") {
+      display.scrollLeft += amount;
+    }
+  });
+}
+
+// keyboard event listeners
 document.addEventListener("keydown", function (event) {
 
     if (event.key >= "0" && event.key <= "9") {
         const button = document.querySelector(`[data-number="${event.key}"]`);
-        button.click();
+        if (button) button.click();
+        return;
     }
 
     if (event.key === "+") {
-        document.querySelector('[data-operator="+"]').click();
+        const btn = document.querySelector('[data-operator="+"]');
+        if (btn) btn.click();
+        return;
     }
 
-        if (event.key === "-") {
-        document.querySelector('[data-operator="-"]').click();
+    if (event.key === "-") {
+        const btn = document.querySelector('[data-operator="-"]');
+        if (btn) btn.click();
+        return;
     }
 
-        if (event.key === "*") {
-        document.querySelector('[data-operator="*]').click();
+    if (event.key === "*") {
+        const btn = document.querySelector('[data-operator="*"]');
+        if (btn) btn.click();
+        return;
     }
 
-        if (event.key === "/") {
-        document.querySelector('[data-operator="/"]').click();
+    if (event.key === "/") {
+        const btn = document.querySelector('[data-operator="/"]');
+        if (btn) btn.click();
+        return;
     }
 
-    //Enter = equals
-    if(event.key === "Enter"){
-        document.querySelector('[data-operator="equals"]').click();
+    // Enter = equals
+    if (event.key === "Enter") {
+        const btn = document.querySelector('[data-action="equals"]');
+        if (btn) btn.click();
+        return;
     }
 
     // Backspace = undo
-    if(event.key === "Backspace"){
-        document.querySelector('[data-operator="undo"]').click();
+    if (event.key === "Backspace") {
+        const btn = document.querySelector('[data-action="undo"]');
+        if (btn) btn.click();
+        return;
     }
 
-    //Escape = clear
-    if(event.key === "Escape"){
-        doctype.querySelector('[data-action]="clear').click();
+    // Escape = clear
+    if (event.key === "Escape") {
+        const btn = document.querySelector('[data-action="clear"]');
+        if (btn) btn.click();
+        return;
     }
 });
 
-function clearCalculatorDisplay(){
-    currentInput = '';
-    previousInput = '';
-    currentOperation = '';
-    document.getElementById('display').value ='';
-}
 
-
+initScrollButtons()
 initKeyboard()
 initCalcDigits()
