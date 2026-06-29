@@ -38,6 +38,7 @@
     font-size: 2rem;
     padding: 10px;
     border: none;
+    box-shadow: 10px 10px 5px #9bb5ba inset;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
