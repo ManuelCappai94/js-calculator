@@ -26,7 +26,7 @@ function divide(num1, num2) {
   return num1 / num2;
 }
 
-<<<<<<< HEAD
+
 const SNARKY_DIVIDE_BY_ZERO = "Can't divide by 0.";
 
 function operate(operator, num1, num2) {
@@ -175,7 +175,7 @@ function initCalcDigits() {
 
 initKeyboard();
 initCalcDigits();
-=======
+
 //keyboard event listeners
 document.addEventListener("keydown", function (event) {
 
