@@ -249,6 +249,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 
+
 initScrollButtons()
 initKeyboard()
 initCalcDigits()
