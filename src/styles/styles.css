@@ -12,6 +12,7 @@
     width: 20%;
     background-color: #040308;
     border-radius: 15px;
+    border-style: double;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     padding: 20px;
     gap: 10px;
@@ -45,7 +46,7 @@
     gap: 20px;
 }
 
-.calcSolar img{
+.calcSolar img {
     width: 200%;
     object-fit: contain;
 }
@@ -85,10 +86,13 @@
     color: #fff;
 }
 
-
 .buttonClear:hover {
     background-color: #fd350e;
     transform: scale(1.1);
+}
+
+.buttonClear:active{
+    transform: scale(0.95);
 }
 
 .buttonOperator {
