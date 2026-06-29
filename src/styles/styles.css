@@ -11,7 +11,7 @@
 .calculator {
     display: flex;
     flex-direction: column;
-    width: 20%;
+    width: 20rem;
     background-color: #040308;
     border-radius: 15px;
     border-style: double;
