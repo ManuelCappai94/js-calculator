@@ -173,9 +173,6 @@ function initCalcDigits() {
   });
 }
 
-initKeyboard();
-initCalcDigits();
-
 //keyboard event listeners
 document.addEventListener("keydown", function (event) {
 
