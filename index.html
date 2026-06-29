@@ -12,8 +12,10 @@
 <body>
     <main class="container">
         <div class="calculator">
-            <picture class="calcLogo"><img src="./src/images/logo.png" alt="alabama instruments logo"></picture>
-            <input type="text" id="display" class="calcDisplay" disabled>
+            <div class="calcTop">
+                <picture class="calcLogo"><img src="./src/images/logo.png" alt="alabama instruments logo"></picture>
+                <input type="text" id="display" class="calcDisplay" disabled>
+            </div>
             <div class="calcButtons">
                 <button class="buttonClear" onclick="clearDisplay()">C</button>
                 <button class="buttonOperator" onclick="appendOperation('/')">&#xF7</button>
