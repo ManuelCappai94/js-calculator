@@ -60,7 +60,12 @@ function formatResult(n) {
 }
 
 function updateDisplay(value) {
-  if (display) display.value = value;
+  if (display) {
+    display.value = String(value);
+    // Force the visible scroll position to the end, so the rightmost
+    // (most recently typed) digits stay in view instead of the start.
+    display.scrollLeft = display.scrollWidth;
+  }
   console.log(value);
 }
 
