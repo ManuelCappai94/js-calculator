@@ -32,42 +32,6 @@ function resetCalculator() {
 }
 
 
-<<<<<<< Updated upstream
-const SNARKY_DIVIDE_BY_ZERO = "Can't divide by 0.";
-
-function operate(operator, num1, num2) {
-  switch (operator) {
-    case "+": return add(num1, num2);
-    case "-": return subtract(num1, num2);
-    case "*": return multiply(num1, num2);
-    case "/":
-      if (num2 === 0) return "ERROR"; // sentinel, handled by caller
-      return divide(num1, num2);
-    default: return num2;
-  }
-}
-
-// Round off floating point noise, and keep the string short enough not to overflow the display.
-function formatResult(n) {
-  if (!isFinite(n)) return "ERROR";
-
-  let rounded = Math.round((n + Number.EPSILON) * 1e9) / 1e9;
-  let str = String(rounded);
-
-  const digitCount = str.replace("-", "").replace(".", "").length;
-  if (digitCount > 12) {
-    if (Math.abs(rounded) >= 1e9 || (Math.abs(rounded) < 1e-6 && rounded !== 0)) {
-      str = rounded.toExponential(4);
-    } else {
-      str = String(Number(rounded.toPrecision(10)));
-    }
-  }
-  return str;
-}
-
-
-=======
->>>>>>> Stashed changes
 function updateDisplay(value) {
   if (calcDisplay) {
     calcDisplay.value = String(value);
@@ -219,17 +183,16 @@ function initCalcDigits() {
   });
 }
 
-<<<<<<< Updated upstream
 function initScrollButtons() {
   document.addEventListener("click", (e) => {
     const scrollBtn = e.target.closest("[data-scroll]");
-    if (!scrollBtn || !display) return;
+    if (!scrollBtn || !calcDisplay) return;
 
     const amount = 40; // pixels per click, tune to taste
     if (scrollBtn.dataset.scroll === "left") {
-      display.scrollLeft -= amount;
+      calcDisplay.scrollLeft -= amount;
     } else if (scrollBtn.dataset.scroll === "right") {
-      display.scrollLeft += amount;
+      calcDisplay.scrollLeft += amount;
     }
   });
 }
@@ -292,48 +255,4 @@ document.addEventListener("keydown", function (event) {
 
 
 initScrollButtons()
-initKeyboard()
-=======
-//keyboard event listeners
-// document.addEventListener("keydown", function (event) {
-
-//     if (event.key >= "0" && event.key <= "9") {
-//         const button = document.querySelector(`[data-number="${event.key}"]`);
-//         button.click();
-//     }
-
-//     if (event.key === "+") {
-//         document.querySelector('[data-operator="+"]').click();
-//     }
-
-//         if (event.key === "-") {
-//         document.querySelector('[data-operator="-"]').click();
-//     }
-
-//         if (event.key === "*") {
-//         document.querySelector('[data-operator="*]').click();
-//     }
-
-//         if (event.key === "/") {
-//         document.querySelector('[data-operator="/"]').click();
-//     }
-
-//     //Enter = equals
-//     if(event.key === "Enter"){
-//         document.querySelector('[data-operator="equals"]').click();
-//     }
-
-//     // Backspace = undo
-//     if(event.key === "Backspace"){
-//         document.querySelector('[data-operator="undo"]').click();
-//     }
-
-//     //Escape = clear
-//     if(event.key === "Escape"){
-//         doctype.querySelector('[data-action]="clear').click();
-//     }
-// });
-
-
->>>>>>> Stashed changes
 initCalcDigits()
