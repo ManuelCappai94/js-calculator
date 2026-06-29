@@ -30,5 +30,48 @@ function initCalcDigits(){
     })
 }
 
+//keyboard event listeners
+document.addEventListener("keydown", function (event) {
+
+    if (event.key >= "0" && event.key <= "9") {
+        const button = document.querySelector(`[data-number="${event.key}"]`);
+        button.click();
+    }
+
+    if (event.key === "+") {
+        document.querySelector('[data-operator="+"]').click();
+    }
+
+        if (event.key === "-") {
+        document.querySelector('[data-operator="-"]').click();
+    }
+
+        if (event.key === "*") {
+        document.querySelector('[data-operator="*]').click();
+    }
+
+        if (event.key === "/") {
+        document.querySelector('[data-operator="/"]').click();
+    }
+
+    //Enter = equals
+    if(event.key === "Enter"){
+        document.querySelector('[data-operator="equals"]').click();
+    }
+
+    // Backspace = undo
+    if(event.key === "Backspace"){
+        document.querySelector('[data-operator="undo"]').click();
+    }
+
+    //Escape = clear
+    if(event.key === "Escape"){
+        doctype.querySelector('[data-action]="clear').click();
+    }
+});
+
+
+
+
 initKeyboard()
 initCalcDigits()
