@@ -239,8 +239,8 @@ main {
     max-width: auto;
     padding: 1rem;
     gap: 10px;
-    border-radius: 10px;
     background-color: #fff;
+    border: solid 5px #000;
     overflow: scroll;
     color: #000;
     font-family: roboto;
