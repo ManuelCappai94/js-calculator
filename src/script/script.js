@@ -1,4 +1,4 @@
-import { operate, formatResult} from "./calculatorOperations.js"
+import { operate, formatResult } from "./calculatorOperations.js"
 
 const mainContainer = document.querySelector(".container")
 const calcContainer = mainContainer.querySelector(".calculator")
@@ -17,8 +17,8 @@ const calculator = {
   operator: null,
   waitingForSecondOperand: false,
   hasError: false,
-  justCalculated : false,
-  lastOperation : null
+  justCalculated: false,
+  lastOperation: null
 };
 
 let currentInput = "";
@@ -46,12 +46,12 @@ function startNewCalculationAfterResult() {
   calculator.waitingForSecondOperand = false;
   calculator.justCalculated = false;
   calculator.lastOperation = null;
- 
+
   currentInput = "";
 }
 
-function updateOperationPreview(){
-  if(!operationPreview) return
+function updateOperationPreview() {
+  if (!operationPreview) return
 
   if (
     calculator.firstOperand === null &&
@@ -61,20 +61,21 @@ function updateOperationPreview(){
     operationPreview.textContent = "No current operation.";
     return;
   }
- 
+
   operationPreview.textContent = `
   ${calculator.firstOperand ?? currentInput}
   ${calculator.operator ?? ""} 
-  ${calculator.waitingForSecondOperand ? currentInput : "" } 
-  ${calculator.lastOperation ? ` = ${calculator.lastOperation.result}` : "" }
+  ${calculator.waitingForSecondOperand ? currentInput : ""} 
+  ${calculator.lastOperation ? ` = ${calculator.lastOperation.result}` : ""}
   `
 }
-function renderCalculationHistory(){
-  if(!calculationHistory) return;
+
+function renderCalculationHistory() {
+  if (!calculationHistory) return;
 
   calculationHistoryList.textContent = "";
-
-  calculationHistory.forEach((operation)=>{
+calcButtons
+  calculationHistory.forEach((operation) => {
     const historyItem = document.createElement("li")
 
     historyItem.textContent = `
@@ -94,81 +95,32 @@ function updateDisplay(value) {
   updateOperationPreview();
 }
 
-function setDecimalButtonEnabled(isEnabled){
+function setDecimalButtonEnabled(isEnabled) {
   if (!decimalBtn) return;
   decimalBtn.disabled = !isEnabled
 }
 
 function handleDigit(number) {
-   startNewCalculationAfterResult();
-    currentInput += number;
-    updateDisplay(currentInput);
+  startNewCalculationAfterResult();
+  currentInput += number;
+  updateDisplay(currentInput);
 }
 
-function handleOperator(nextOperator){
+function handleOperator(nextOperator) {
   if (currentInput === "" && calculator.firstOperand === null) return;
 
   if (calculator.firstOperand === null) {
-        calculator.firstOperand = Number(currentInput);
-    } else if (currentInput !== "") {
-        const secondOperand = Number(currentInput);
-
-        const result = operate(
-          calculator.operator,
-           calculator.firstOperand,
-            secondOperand
-          );
-
-        if (result === "ERROR") {
-          updateDisplay(SNARKY_DIVIDE_BY_ZERO);
-          calculator.hasError = true;
-          return;
-        }
-
-        const displayValue = formatResult(result);
-
-        const completedOperation = {
-          firstOperand: calculator.firstOperand,
-          operator: calculator.operator,
-          secondOperand,
-          result: displayValue,
-      };
-
-      calculationHistory.push(completedOperation);
-      renderCalculationHistory();
-
-        calculator.firstOperand = Number(displayValue);
-        updateDisplay(displayValue);
-      }
-
-      calculator.operator = nextOperator;
-      currentInput = "";
-      calculator.waitingForSecondOperand = true;
-      calculator.justCalculated = false;
-
-      setDecimalButtonEnabled(true);
-      updateOperationPreview()
-}
-
-function calculate(){
-  if (calculator.operator === null || currentInput === "") return;
-
+    calculator.firstOperand = Number(currentInput);
+  } else if (currentInput !== "") {
     const secondOperand = Number(currentInput);
 
     const result = operate(
-        calculator.operator,
-        calculator.firstOperand,
-        secondOperand
-      );
+      calculator.operator,
+      calculator.firstOperand,
+      secondOperand
+    );
 
     if (result === "ERROR") {
-        calculator.lastOperation = {
-        firstOperand: calculator.firstOperand,
-        operator: calculator.operator,
-        secondOperand,
-        result: SNARKY_DIVIDE_BY_ZERO,
-      };
-
       updateDisplay(SNARKY_DIVIDE_BY_ZERO);
       calculator.hasError = true;
       return;
@@ -176,33 +128,82 @@ function calculate(){
 
     const displayValue = formatResult(result);
 
-    updateDisplay(displayValue);
-
-   const completedOperation =  calculator.lastOperation = {
+    const completedOperation = {
       firstOperand: calculator.firstOperand,
       operator: calculator.operator,
       secondOperand,
       result: displayValue,
     };
 
-    updateOperationPreview()
-    calculator.lastOperation = completedOperation;
     calculationHistory.push(completedOperation);
-
     renderCalculationHistory();
-    
-    calculator.firstOperand = Number(displayValue);
-    calculator.operator = null;
-    calculator.waitingForSecondOperand = false;
-    calculator.justCalculated = true;
-    calculator.lastOperation = null;
 
-    currentInput = "";
-    setDecimalButtonEnabled(true);
+    calculator.firstOperand = Number(displayValue);
+    updateDisplay(displayValue);
+  }
+
+  calculator.operator = nextOperator;
+  currentInput = "";
+  calculator.waitingForSecondOperand = true;
+  calculator.justCalculated = false;
+
+  setDecimalButtonEnabled(true);
+  updateOperationPreview()
+}
+
+function calculate() {
+  if (calculator.operator === null || currentInput === "") return;
+
+  const secondOperand = Number(currentInput);
+
+  const result = operate(
+    calculator.operator,
+    calculator.firstOperand,
+    secondOperand
+  );
+
+  if (result === "ERROR") {
+    calculator.lastOperation = {
+      firstOperand: calculator.firstOperand,
+      operator: calculator.operator,
+      secondOperand,
+      result: SNARKY_DIVIDE_BY_ZERO,
+    };
+
+    updateDisplay(SNARKY_DIVIDE_BY_ZERO);
+    calculator.hasError = true;
+    return;
+  }
+
+  const displayValue = formatResult(result);
+
+  updateDisplay(displayValue);
+
+  const completedOperation = calculator.lastOperation = {
+    firstOperand: calculator.firstOperand,
+    operator: calculator.operator,
+    secondOperand,
+    result: displayValue,
+  };
+
+  updateOperationPreview()
+  calculator.lastOperation = completedOperation;
+  calculationHistory.push(completedOperation);
+
+  renderCalculationHistory();
+
+  calculator.firstOperand = Number(displayValue);
+  calculator.operator = null;
+  calculator.waitingForSecondOperand = false;
+  calculator.justCalculated = true;
+  calculator.lastOperation = null;
+
+  currentInput = "";
+  setDecimalButtonEnabled(true);
 
 }
 
-function inputDecimal(){
+function inputDecimal() {
   startNewCalculationAfterResult();
 
   if (currentInput.includes(".")) return;
@@ -212,31 +213,35 @@ function inputDecimal(){
   updateDisplay(currentInput);
 }
 
-function inputUndo(){
+function inputUndo() {
   currentInput = currentInput.slice(0, -1);
 
-  if (!currentInput.includes(".")){
+  if (!currentInput.includes(".")) {
     setDecimalButtonEnabled(true);
-  } 
+  }
 
   updateDisplay(currentInput === "" ? "0" : currentInput);
 }
 
-function handleActionBtn(action){
-  if(action === "clear"){
+function handleActionBtn(action) {
+  if (action === "clear") {
     resetCalculator();
     return
   }
-  if(action === "equals"){
+  if (action === "equals") {
     calculate()
     return
   }
-  if(action === "decimal"){
+  if (action === "decimal") {
     inputDecimal()
     return
   }
-  if(action === "undo"){
+  if (action === "undo") {
     inputUndo()
+  }
+  if (action === "clear-history") {
+    clearHistory();
+    return;
   }
 }
 
@@ -247,7 +252,7 @@ function initCalcDigits() {
     const actionBtn = e.target.closest("[data-action]");
 
     // If we're in an error state, any press except "clear" resets first.
-    if(calculator.hasError && actionBtn?.dataset.action !== "clear"){
+    if (calculator.hasError && actionBtn?.dataset.action !== "clear") {
       resetCalculator();
     }
 
@@ -261,7 +266,7 @@ function initCalcDigits() {
       return;
     }
 
-    if(actionBtn){
+    if (actionBtn) {
       handleActionBtn(actionBtn.dataset.action)
     }
   });
@@ -278,15 +283,17 @@ function initScrollButtons() {
     } else if (scrollBtn.dataset.scroll === "right") {
       calcDisplay.scrollLeft += amount;
     }
+
+
   });
 }
 
 function initKeyboardInput() {
   document.addEventListener("keydown", function (event) {
-  
-   const isClearKey = event.key === "Escape";
 
-   const isCalculatorKey =
+    const isClearKey = event.key === "Escape";
+
+    const isCalculatorKey =
       (event.key >= "0" && event.key <= "9") ||
       event.key === "." ||
       event.key === "+" ||
@@ -304,58 +311,73 @@ function initKeyboardInput() {
       resetCalculator();
     }
 
-      if (event.key >= "0" && event.key <= "9") {
-          handleDigit(event.key);
-          return;
-      }
+    if (event.key >= "0" && event.key <= "9") {
+      handleDigit(event.key);
+      return;
+    }
 
-      if (event.key === ".") {
-          handleActionBtn("decimal");
-          return;
-      }
+    if (event.key === ".") {
+      handleActionBtn("decimal");
+      return;
+    }
 
-      if (event.key === "+") {
-          handleOperator("+");
-          return;
-      }
+    if (event.key === "+") {
+      handleOperator("+");
+      return;
+    }
 
-      if (event.key === "-") {
-          handleOperator("-");
-          return;
-      }
+    if (event.key === "-") {
+      handleOperator("-");
+      return;
+    }
 
-      if (event.key === "*") {
-          handleOperator("*");
-          return;
-      }
+    if (event.key === "*") {
+      handleOperator("*");
+      return;
+    }
 
-      if (event.key === "/") {
-          event.preventDefault()
+    if (event.key === "/") {
+      event.preventDefault()
 
-          handleOperator("/");
-          return;
-      }
+      handleOperator("/");
+      return;
+    }
 
-      if (event.key === "Enter" || event.key === "=") {
-          event.preventDefault()
+    if (event.key === "Enter" || event.key === "=") {
+      event.preventDefault()
 
-          handleActionBtn("equals");
-          return;
-      }
+      handleActionBtn("equals");
+      return;
+    }
 
-      if (event.key === "Backspace") {
-          event.preventDefault()
+    if (event.key === "Backspace") {
+      event.preventDefault()
 
-        handleActionBtn("undo");
-          return;
-      }
+      handleActionBtn("undo");
+      return;
+    }
 
-      if (event.key === "Escape") {
-        handleActionBtn("clear");
-          return;
-      }
+    if (event.key === "Escape") {
+      handleActionBtn("clear");
+      return;
+    }
   });
 }
+const clearHistoryBtn = mainContainer.querySelector(
+  '[data-action="clear-history"]'
+)
+
+function clearHistory() {
+  calculationHistory = [];
+  calculator.lastOperation = null;
+
+  calculationHistoryList.innerHTML =
+    '<li class="empty-history-message">No calculations yet.</li>';
+
+  updateOperationPreview();
+}
+
+clearHistoryBtn.addEventListener("click", clearHistory);
 
 resetCalculator()
 initScrollButtons()
