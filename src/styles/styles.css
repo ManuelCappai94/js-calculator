@@ -231,10 +231,10 @@ main {
 }
 
 .operation-overview {
-    display: grid;
-    grid-template-columns: auto;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    text-align: center;
     max-height: 25rem;
     max-width: auto;
     padding: 1rem;
@@ -254,17 +254,17 @@ main {
     color: #fff;
 }
 
-.calculation-history {
-    padding-left: 1rem;
+.operation-preview {
+    background-color: #000;
+    color: #fff;
 }
 
-
 .calculation-history {
-    align-items: center;
-    justify-content: center;
+
     padding-left: auto;
     background-color: #000;
     color: #fff;
+    text-align: center;
 }
 
 .resetHistory {
