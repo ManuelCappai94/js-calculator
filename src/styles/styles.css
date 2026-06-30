@@ -4,7 +4,7 @@
     font-weight: normal;
 }
 
-@font-face{
+@font-face {
     font-family: roboto;
     src: url(../fonts/Roboto-1/Roboto-VariableFont_wdth\,wght.ttf);
     font-weight: normal;
@@ -13,6 +13,7 @@
 li {
     list-style: none;
 }
+
 .container {
     display: flex;
     justify-content: center;
@@ -57,7 +58,8 @@ li {
     text-align: right;
     font-size: 2.5rem;
     padding: 10px;
-    padding-right: 3px;
+    padding-left: 2rem;
+    padding-right: 0.5rem;
     border: none;
     box-shadow: 5px 5px 1px #9bb5ba inset;
     border-radius: 10px;
@@ -72,6 +74,22 @@ li {
     margin-left: auto;
     display: flex;
     gap: 5px;
+}
+
+.display-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.operator-indicator {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: technology;
+    font-size: 1.5rem;
+    color: #555;
+    pointer-events: none;
 }
 
 .scrollBtn {
@@ -164,7 +182,7 @@ li {
 
 }
 
-.operation-overview{
+.operation-overview {
     max-height: 25rem;
     max-width: 20rem;
     padding: 1rem;
@@ -173,27 +191,34 @@ li {
     overflow: scroll;
 }
 
-.history-container{
+.history-container {
     font-family: roboto;
 }
 
-.calculation-history{
+.calculation-history {
     padding-left: 1rem;
 }
+
 @media screen and (max-width: 768px) {
-    .container{
+    .container {
         flex-direction: column-reverse;
     }
-    .operation-overview{
+
+    .operation-overview {
         max-height: 10rem;
         padding: 0.5rem;
     }
-    .operation-overview-title{
+
+    .operation-overview-title {
         margin: 1rem auto;
     }
-    .calculation-history, .history-title, .current-operation-title, .operation-preview{
+
+    .calculation-history,
+    .history-title,
+    .current-operation-title,
+    .operation-preview {
         margin: 0.5rem;
     }
- 
-  
+
+
 }

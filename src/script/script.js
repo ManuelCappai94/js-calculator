@@ -27,6 +27,7 @@ let calculationHistory = [];
 function resetCalculator() {
   calculator.firstOperand = null;
   calculator.operator = null;
+  updateOperatorIndicator();
   calculator.waitingForSecondOperand = false;
   calculator.hasError = false;
   calculator.justCalculated = false;
@@ -74,7 +75,7 @@ function renderCalculationHistory() {
   if (!calculationHistory) return;
 
   calculationHistoryList.textContent = "";
-calcButtons
+  calcButtons
   calculationHistory.forEach((operation) => {
     const historyItem = document.createElement("li")
 
@@ -143,6 +144,7 @@ function handleOperator(nextOperator) {
   }
 
   calculator.operator = nextOperator;
+  updateOperatorIndicator();
   currentInput = "";
   calculator.waitingForSecondOperand = true;
   calculator.justCalculated = false;
@@ -153,6 +155,7 @@ function handleOperator(nextOperator) {
 
 function calculate() {
   if (calculator.operator === null || currentInput === "") return;
+  updateOperatorIndicator();
 
   const secondOperand = Number(currentInput);
 
@@ -378,6 +381,15 @@ function clearHistory() {
 }
 
 clearHistoryBtn.addEventListener("click", clearHistory);
+
+const operatorIndicator = mainContainer.querySelector(".operator-indicator");
+
+function updateOperatorIndicator() {
+  if (!operatorIndicator) return;
+
+  operatorIndicator.textContent = calculator.operator || "";
+  operatorIndicator.hidden = !calculator.operator;
+}
 
 resetCalculator()
 initScrollButtons()

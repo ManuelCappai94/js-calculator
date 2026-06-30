@@ -17,7 +17,10 @@
                 <picture class="calcLogo">
                     <img src="./src/images/logo.png" alt="alabama instruments logo">
                 </picture>
-                <input type="text" id="display" class="calcDisplay" readonly>
+                <div class="display-wrapper">
+                    <span class="operator-indicator">+</span>
+                    <input type="text" id="display" class="calcDisplay" readonly>
+                </div>
             </div>
             <div class="calcButtons">
                 <button class="buttonClear" data-action="clear" type="button">&#8705</button>
@@ -29,7 +32,7 @@
                 <div>
                     <button class="scrollBtn" data-scroll="right" type="button"
                         aria-label="scroll display right">&#8594;</button>
-                    </div>
+                </div>
 
                 <button class="buttonNum" data-number="7" type="button">7</button>
                 <button class="buttonNum" data-number="8" type="button">8</button>
@@ -61,7 +64,7 @@
                 <h3 class="history-title">Calculation History</h3>
 
                 <ul class="calculation-history">
-                <li class="empty-history-message">No calculations yet.</li>
+                    <li class="empty-history-message">No calculations yet.</li>
                 </ul>
             </div>
 
@@ -70,9 +73,9 @@
 
                 <p class="operation-preview"></p>
             </div>
-           
+
         </section>
-         <button data-action="clear-history" type="button">Clear History</button>
+        <button data-action="clear-history" type="button">Clear History</button>
     </main>
 </body>
 
