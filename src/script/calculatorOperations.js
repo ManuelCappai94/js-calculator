@@ -24,9 +24,6 @@ function operate(operator, num1, num2) {
 }
 
 
-// Round off floating point noise, and keep the string short enough not to overflow the display.
-// THIS FUNCTION IS A VERY GOOD CALL
-// YES we have to remove these comments, don't forget
 function formatResult(result) {
   if (!isFinite(result)) return "ERROR";
 

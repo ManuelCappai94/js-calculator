@@ -35,11 +35,11 @@ main {
 }
 
 .instructor {
-    align-items: center;
-    justify-content: center;
+ 
     text-align: center;
-    max-height: 25rem;
-    max-width: auto;
+    /* max-height: 20rem; */
+    height: fit-content;
+    max-width: 30rem;
     padding: 1rem;
     gap: 10px;
     border-radius: 10px;
@@ -58,7 +58,7 @@ main {
 }
 
 .instructor .stripes {
-    height: 70px;
+    height: 40px;
     border-top: 8px solid #000;
     border-left: 8px solid #000;
     border-right: 8px solid #000;
@@ -236,7 +236,7 @@ main {
     justify-content: center;
     text-align: center;
     max-height: 25rem;
-    max-width: auto;
+    max-width: 25rem;
     padding: 1rem;
     gap: 10px;
     background-color: #fff;
@@ -293,6 +293,7 @@ main {
 
     .operation-overview {
         max-height: 10rem;
+        max-width: 20rem;
         padding: 0.5rem;
     }
 

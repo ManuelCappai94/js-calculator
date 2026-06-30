@@ -91,8 +91,6 @@ function renderCalculationHistory() {
 function updateDisplay(value) {
   if (calcDisplay) {
     calcDisplay.value = String(value);
-    // Force the visible scroll position to the end, so the rightmost
-    // (most recently typed) digits stay in view instead of the start.
     calcDisplay.scrollLeft = calcDisplay.scrollWidth;
   }
   updateOperationPreview();
