@@ -127,6 +127,16 @@ function handleOperator(nextOperator){
 
         const displayValue = formatResult(result);
 
+        const completedOperation = {
+          firstOperand: calculator.firstOperand,
+          operator: calculator.operator,
+          secondOperand,
+          result: displayValue,
+      };
+
+      calculationHistory.push(completedOperation);
+      renderCalculationHistory();
+
         calculator.firstOperand = Number(displayValue);
         updateDisplay(displayValue);
       }
