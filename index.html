@@ -12,14 +12,18 @@
 
 <body>
     <main class="container">
+        <div class="instructor">
+            <p>mandei uma bufa!</p>
+        </div>
+
         <div class="calculator">
             <div class="calcTop">
                 <picture class="calcLogo">
                     <img src="./src/images/logo.png" alt="alabama instruments logo">
                 </picture>
                 <div class="display-wrapper">
-                    <span class="operator-indicator">+</span>
                     <input type="text" id="display" class="calcDisplay" readonly>
+                    <span class="operator-indicator"></span>
                 </div>
             </div>
             <div class="calcButtons">
@@ -73,9 +77,9 @@
 
                 <p class="operation-preview"></p>
             </div>
-
+            <button data-action="clear-history" type="button">Clear History</button>
         </section>
-        <button data-action="clear-history" type="button">Clear History</button>
+
     </main>
 </body>
 
