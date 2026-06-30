@@ -44,7 +44,4 @@ function formatResult(result) {
   return str;
 }
 
-export {
-    operate,
-    formatResult
-}
+export { operate, formatResult}

@@ -1,7 +1,4 @@
-import {
-    operate,
-    formatResult
-} from "./calculatorOperations.js"
+import { operate, formatResult} from "./calculatorOperations.js"
 
 const container = document.querySelector(".calculator")
 const calcButtons = container.querySelector(".calcButtons")
@@ -197,62 +194,63 @@ function initScrollButtons() {
   });
 }
 
-// keyboard event listeners
-document.addEventListener("keydown", function (event) {
+function initKeyboardInput() {
+  document.addEventListener("keydown", function (event) {
 
-    if (event.key >= "0" && event.key <= "9") {
-        const button = document.querySelector(`[data-number="${event.key}"]`);
-        if (button) button.click();
-        return;
-    }
+      if (event.key >= "0" && event.key <= "9") {
+          handleDigit(event.key);
+          return;
+      }
 
-    if (event.key === "+") {
-        const btn = document.querySelector('[data-operator="+"]');
-        if (btn) btn.click();
-        return;
-    }
+      if (event.key === ".") {
+          handleActionBtn("decimal");
+          return;
+      }
 
-    if (event.key === "-") {
-        const btn = document.querySelector('[data-operator="-"]');
-        if (btn) btn.click();
-        return;
-    }
+      if (event.key === "+") {
+          handleOperator("+");
+          return;
+      }
 
-    if (event.key === "*") {
-        const btn = document.querySelector('[data-operator="*"]');
-        if (btn) btn.click();
-        return;
-    }
+      if (event.key === "-") {
+          handleOperator("-");
+          return;
+      }
 
-    if (event.key === "/") {
-        const btn = document.querySelector('[data-operator="/"]');
-        if (btn) btn.click();
-        return;
-    }
+      if (event.key === "*") {
+          handleOperator("*");
+          return;
+      }
 
-    // Enter = equals
-    if (event.key === "Enter") {
-        const btn = document.querySelector('[data-action="equals"]');
-        if (btn) btn.click();
-        return;
-    }
+      if (event.key === "/") {
+          event.preventDefault()
 
-    // Backspace = undo
-    if (event.key === "Backspace") {
-        const btn = document.querySelector('[data-action="undo"]');
-        if (btn) btn.click();
-        return;
-    }
+          handleOperator("/");
+          return;
+      }
 
-    // Escape = clear
-    if (event.key === "Escape") {
-        const btn = document.querySelector('[data-action="clear"]');
-        if (btn) btn.click();
-        return;
-    }
-});
+      if (event.key === "Enter" || event.key === "=") {
+          event.preventDefault()
 
+          handleActionBtn("equals");
+          return;
+      }
 
+      if (event.key === "Backspace") {
+          event.preventDefault()
 
+        handleActionBtn("undo");
+          return;
+      }
+
+      if (event.key === "Escape") {
+        handleActionBtn("clear");
+          return;
+      }
+  });
+}
+
+resetCalculator()
 initScrollButtons()
 initCalcDigits()
+initKeyboardInput()
