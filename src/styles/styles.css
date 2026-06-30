@@ -1,3 +1,9 @@
+@font-face {
+    font-family: technology;
+    src: url(../fonts/technology/Technology.ttf);
+    font-weight: normal;
+}
+
 li {
     list-style: none;
 }
@@ -43,8 +49,9 @@ li {
     height: 50px;
     margin-left: auto;
     text-align: right;
-    font-size: 2rem;
+    font-size: 2.5rem;
     padding: 10px;
+    padding-right: 3px;
     border: none;
     box-shadow: 5px 5px 1px #9bb5ba inset;
     border-radius: 10px;
@@ -52,6 +59,7 @@ li {
     min-width: 0;
     overflow-x: scroll;
     white-space: nowrap;
+    font-family: technology;
 }
 
 .calcScroll {
