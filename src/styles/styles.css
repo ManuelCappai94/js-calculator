@@ -13,14 +13,16 @@
 li {
     list-style: none;
 }
-main{
-      background-image: url(../images/mosaic.png);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+
+main {
+    background-image: url(../images/mosaic.png);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
+
 .calculator-container {
     display: flex;
     justify-content: center;
@@ -28,12 +30,45 @@ main{
     height: fit-content;
     padding: 10px;
     gap: 10px;
-  
+
     background-repeat: repeat;
 }
 
-.instructor{
-    background-color: #5d5b62;
+.instructor {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-height: 25rem;
+    max-width: auto;
+    padding: 1rem;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: #f8c928;
+    border-style: solid;
+    border-color: #000;
+}
+
+.instructor h3 {
+    width: auto;
+    font-size: 20px;
+    background-color: #000;
+    font-size: larger;
+    color: #f8c928;
+}
+
+.instructor .stripes {
+    height: 70px;
+    border-top: 8px solid #000;
+    border-left: 8px solid #000;
+    border-right: 8px solid #000;
+    border-bottom: 8px solid #000;
+
+    background:
+        repeating-linear-gradient(-45deg,
+            #000 0px,
+            #000 28px,
+            #f8c928 28px,
+            #f8c928 56px);
 }
 
 .calculator {
@@ -195,18 +230,60 @@ main{
 }
 
 .operation-overview {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    justify-content: center;
     max-height: 25rem;
-    max-width: 20rem;
+    max-width: auto;
     padding: 1rem;
+    gap: 10px;
     border-radius: 10px;
-    background-color: blanchedalmond;
+    background-color: #fff;
     overflow: scroll;
+    color: #000;
     font-family: roboto;
+    overflow-y: scroll;
+    scrollbar-color: #000 #fff;
+}
+
+.operation-overview h2 {
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
 }
 
 .calculation-history {
     padding-left: 1rem;
 }
+
+
+.calculation-history {
+    align-items: center;
+    justify-content: center;
+    padding-left: auto;
+    background-color: #000;
+    color: #fff;
+}
+
+.resetHistory {
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border-style: none;
+    font-family: roboto;
+    margin-bottom: 10px;
+}
+
+.resetHistory:hover {
+    transform: scale(1.1);
+}
+
+.resetHistory:active {
+    transform: scale(0.95);
+}
+
 
 @media screen and (max-width: 768px) {
     .calculator-container {

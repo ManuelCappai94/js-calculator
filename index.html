@@ -11,75 +11,83 @@
 </head>
 
 <body>
-    <main >
+    <main>
         <div class="instructor">
-            <p>mandei uma bufa!</p>
+            <h3>READ ME FIRST!</h3>
+            <h4>Regarding keyboard input:</h4>
+            <p>On this calculator app, you can use keyboard inputs, to interact with the calculator.</p>
+            <p>You may also, see all console feedback, if you press F12 </p>
+            <p>Please stick only with numbers from 0 to 9, a operator values such as "/" "*" "-" "+" "="</p>
+            <div class="stripes"></div>
         </div>
-    <article class="calculator-container">
-        <div class="calculator">
-            <div class="calcTop">
-                <picture class="calcLogo">
-                    <img src="./src/images/logo.png" alt="alabama instruments logo">
-                </picture>
-                <div class="display-wrapper">
-                    <input type="text" id="display" class="calcDisplay" readonly>
-                    <span class="operator-indicator"></span>
+
+        <article class="calculator-container">
+            <div class="calculator">
+                <div class="calcTop">
+                    <picture class="calcLogo">
+                        <img src="./src/images/logo.png" alt="alabama instruments logo">
+                    </picture>
+                    <div class="display-wrapper">
+                        <input type="text" id="display" class="calcDisplay" readonly>
+                        <span class="operator-indicator"></span>
+                    </div>
+                </div>
+                <div class="calcButtons">
+                    <button class="buttonClear" data-action="clear" type="button">&#8705</button>
+                    <button class="buttonClear" data-action="undo" type="button">Undo</button>
+                    <div class="calcScroll">
+                        <button class="scrollBtn" data-scroll="left" type="button"
+                            aria-label="scroll display left">&#8592;</button>
+                    </div>
+                    <div>
+                        <button class="scrollBtn" data-scroll="right" type="button"
+                            aria-label="scroll display right">&#8594;</button>
+                    </div>
+
+                    <button class="buttonNum" data-number="7" type="button">7</button>
+                    <button class="buttonNum" data-number="8" type="button">8</button>
+                    <button class="buttonNum" data-number="9" type="button">9</button>
+                    <button class="buttonOperator" data-operator="/" type="button">&#xF7</button>
+
+                    <button class="buttonNum" data-number="4" type="button">4</button>
+                    <button class="buttonNum" data-number="5" type="button">5</button>
+                    <button class="buttonNum" data-number="6" type="button">6</button>
+                    <button class="buttonOperator" data-operator="*" type="button">&#215</button>
+
+                    <button class="buttonNum" data-number="1" type="button">1</button>
+                    <button class="buttonNum" data-number="2" type="button">2</button>
+                    <button class="buttonNum" data-number="3" type="button">3</button>
+                    <button class="buttonOperator" data-operator="-" type="button">&#8722</button>
+
+                    <button class="buttonNum" data-action="decimal" type="button">&#46</button>
+                    <button class="buttonNum" data-number="0" type="button">0</button>
+                    <button class="buttonOperator" data-action="equals" type="button">&#61</button>
+                    <button class="buttonOperator" data-operator="+" type="button">&#43</button>
                 </div>
             </div>
-            <div class="calcButtons">
-                <button class="buttonClear" data-action="clear" type="button">&#8705</button>
-                <button class="buttonClear" data-action="undo" type="button">Undo</button>
-                <div class="calcScroll">
-                    <button class="scrollBtn" data-scroll="left" type="button"
-                        aria-label="scroll display left">&#8592;</button>
+            <section class="operation-overview" aria-labelledby="operation-overview-title">
+                <h2 class="operation-overview-title">
+                    Calculation Overview
+                </h2>
+
+                <div class="history-container">
+                    <h3 class="history-title">Calculation History</h3>
+
+                    <ul class="calculation-history">
+                        <li class="empty-history-message">No calculations yet.</li>
+                    </ul>
                 </div>
-                <div>
-                    <button class="scrollBtn" data-scroll="right" type="button"
-                        aria-label="scroll display right">&#8594;</button>
+
+                <div class="current-operation-container">
+                    <h3 class="current-operation-title">Current Operation</h3>
+
+                    <p class="operation-preview"></p>
+
                 </div>
+                <button data-action="clear-history" class="resetHistory" type="button">Clear History</button>
 
-                <button class="buttonNum" data-number="7" type="button">7</button>
-                <button class="buttonNum" data-number="8" type="button">8</button>
-                <button class="buttonNum" data-number="9" type="button">9</button>
-                <button class="buttonOperator" data-operator="/" type="button">&#xF7</button>
-
-                <button class="buttonNum" data-number="4" type="button">4</button>
-                <button class="buttonNum" data-number="5" type="button">5</button>
-                <button class="buttonNum" data-number="6" type="button">6</button>
-                <button class="buttonOperator" data-operator="*" type="button">&#215</button>
-
-                <button class="buttonNum" data-number="1" type="button">1</button>
-                <button class="buttonNum" data-number="2" type="button">2</button>
-                <button class="buttonNum" data-number="3" type="button">3</button>
-                <button class="buttonOperator" data-operator="-" type="button">&#8722</button>
-
-                <button class="buttonNum" data-action="decimal" type="button">&#46</button>
-                <button class="buttonNum" data-number="0" type="button">0</button>
-                <button class="buttonOperator" data-action="equals" type="button">&#61</button>
-                <button class="buttonOperator" data-operator="+" type="button">&#43</button>
-            </div>
-        </div>
-        <section class="operation-overview" aria-labelledby="operation-overview-title">
-            <h2 class="operation-overview-title">
-                Calculation Overview
-            </h2>
-            
-            <div class="history-container">
-                <h3 class="history-title">Calculation History</h3>
-                
-                <ul class="calculation-history">
-                    <li class="empty-history-message">No calculations yet.</li>
-                </ul>
-            </div>
-            
-            <div class="current-operation-container">
-                <h3 class="current-operation-title">Current Operation</h3>
-                
-                <p class="operation-preview"></p>
-            </div>
-            <button data-action="clear-history" type="button">Clear History</button>
-        </section>
-    </article>
+            </section>
+        </article>
 
     </main>
 </body>
