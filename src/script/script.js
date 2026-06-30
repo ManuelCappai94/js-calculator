@@ -1,14 +1,17 @@
 import { operate, formatResult } from "./calculatorOperations.js"
 
-const mainContainer = document.querySelector(".container")
-const calcContainer = mainContainer.querySelector(".calculator")
-const calcButtons = calcContainer.querySelector(".calcButtons")
-const calcDisplay = calcContainer.querySelector(".calcDisplay")
-const decimalBtn = calcButtons.querySelector('[data-action="decimal"]')
-const historyContainer = mainContainer.querySelector(".history-container")
+const mainContainer = document.querySelector(".calculator-container");
+const calcContainer = mainContainer.querySelector(".calculator");
+const calcButtons = calcContainer.querySelector(".calcButtons");
+const calcDisplay = calcContainer.querySelector(".calcDisplay");
+const decimalBtn = calcButtons.querySelector('[data-action="decimal"]');
+
+const operationOverview = mainContainer.querySelector(".operation-overview");
+const historyContainer = operationOverview.querySelector(".history-container");
 const calculationHistoryList = historyContainer.querySelector(".calculation-history");
-const calcHistoryTitle = historyContainer.querySelector(".history-title")
-const operationPreview = mainContainer.querySelector(".operation-preview")
+const operationPreview = operationOverview.querySelector(".operation-preview");
+const clearHistoryBtn = operationOverview.querySelector('[data-action="clear-history"]');
+const operatorIndicator = calcContainer.querySelector(".operator-indicator");
 
 const SNARKY_DIVIDE_BY_ZERO = "Can't divide by 0.";
 
@@ -72,18 +75,17 @@ function updateOperationPreview() {
 }
 
 function renderCalculationHistory() {
-  if (!calculationHistory) return;
+  if (!calculationHistoryList) return;
 
   calculationHistoryList.textContent = "";
-  calcButtons
-  calculationHistory.forEach((operation) => {
-    const historyItem = document.createElement("li")
 
-    historyItem.textContent = `
-     ${operation.firstOperand} ${operation.operator} ${operation.secondOperand} = ${operation.result}
-    `;
+  calculationHistory.forEach((operation) => {
+    const historyItem = document.createElement("li");
+
+    historyItem.textContent = `${operation.firstOperand} ${operation.operator} ${operation.secondOperand} = ${operation.result}`;
+
     calculationHistoryList.appendChild(historyItem);
-  })
+  });
 }
 
 function updateDisplay(value) {
@@ -155,7 +157,7 @@ function handleOperator(nextOperator) {
 
 function calculate() {
   if (calculator.operator === null || currentInput === "") return;
-  updateOperatorIndicator();
+  
 
   const secondOperand = Number(currentInput);
 
@@ -197,6 +199,7 @@ function calculate() {
 
   calculator.firstOperand = Number(displayValue);
   calculator.operator = null;
+  updateOperatorIndicator();
   calculator.waitingForSecondOperand = false;
   calculator.justCalculated = true;
   calculator.lastOperation = null;
@@ -366,23 +369,30 @@ function initKeyboardInput() {
     }
   });
 }
-const clearHistoryBtn = mainContainer.querySelector(
-  '[data-action="clear-history"]'
-)
 
+function renderEmptyHistoryMessage() {
+  if (!calculationHistoryList) return;
+
+  calculationHistoryList.textContent = "";
+
+  const emptyMessage = document.createElement("li");
+  emptyMessage.classList.add("empty-history-message");
+  emptyMessage.textContent = "No calculations yet.";
+
+  calculationHistoryList.appendChild(emptyMessage);
+}
 function clearHistory() {
   calculationHistory = [];
   calculator.lastOperation = null;
 
-  calculationHistoryList.innerHTML =
-    '<li class="empty-history-message">No calculations yet.</li>';
-
+  renderEmptyHistoryMessage();
   updateOperationPreview();
 }
 
-clearHistoryBtn.addEventListener("click", clearHistory);
+if (clearHistoryBtn) {
+  clearHistoryBtn.addEventListener("click", clearHistory);
+}
 
-const operatorIndicator = mainContainer.querySelector(".operator-indicator");
 
 function updateOperatorIndicator() {
   if (!operatorIndicator) return;
@@ -390,6 +400,7 @@ function updateOperatorIndicator() {
   operatorIndicator.textContent = calculator.operator || "";
   operatorIndicator.hidden = !calculator.operator;
 }
+
 
 resetCalculator()
 initScrollButtons()
