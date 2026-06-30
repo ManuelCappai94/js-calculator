@@ -4,6 +4,12 @@
     font-weight: normal;
 }
 
+@font-face{
+    font-family: roboto;
+    src: url(../fonts/Roboto-1/Roboto-VariableFont_wdth\,wght.ttf);
+    font-weight: normal;
+}
+
 li {
     list-style: none;
 }
@@ -91,6 +97,7 @@ li {
 .calcButtons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    font-family: roboto;
     padding-top: 10px;
     gap: 10px;
 }
@@ -165,6 +172,11 @@ li {
     background-color: blanchedalmond;
     overflow: scroll;
 }
+
+.history-container{
+    font-family: roboto;
+}
+
 .calculation-history{
     padding-left: 1rem;
 }
