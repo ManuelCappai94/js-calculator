@@ -13,18 +13,22 @@
 li {
     list-style: none;
 }
-
-.container {
-    /*
-    display: flex;*/
-    display: grid;
-    grid-template-columns: 20% 20% 20%;
+main{
+      background-image: url(../images/mosaic.png);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+}
+.calculator-container {
+    display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: fit-content;
     padding: 10px;
     gap: 10px;
-    background-image: url(../images/mosaic.png);
+  
     background-repeat: repeat;
 }
 
@@ -197,9 +201,6 @@ li {
     border-radius: 10px;
     background-color: blanchedalmond;
     overflow: scroll;
-}
-
-.history-container {
     font-family: roboto;
 }
 
@@ -208,7 +209,7 @@ li {
 }
 
 @media screen and (max-width: 768px) {
-    .container {
+    .calculator-container {
         flex-direction: column-reverse;
     }
 
