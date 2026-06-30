@@ -1,9 +1,14 @@
 import { operate, formatResult} from "./calculatorOperations.js"
 
-const container = document.querySelector(".calculator")
-const calcButtons = container.querySelector(".calcButtons")
-const calcDisplay = container.querySelector(".calcDisplay")
+const mainContainer = document.querySelector(".container")
+const calcContainer = mainContainer.querySelector(".calculator")
+const calcButtons = calcContainer.querySelector(".calcButtons")
+const calcDisplay = calcContainer.querySelector(".calcDisplay")
 const decimalBtn = calcButtons.querySelector('[data-action="decimal"]')
+const historyContainer = mainContainer.querySelector(".history-container")
+const calculationHistoryList = historyContainer.querySelector(".calculation-history");
+const calcHistoryTitle = historyContainer.querySelector(".history-title")
+const operationPreview = mainContainer.querySelector(".operation-preview")
 
 const SNARKY_DIVIDE_BY_ZERO = "Can't divide by 0.";
 
@@ -12,15 +17,20 @@ const calculator = {
   operator: null,
   waitingForSecondOperand: false,
   hasError: false,
+  justCalculated : false,
+  lastOperation : null
 };
 
 let currentInput = "";
+let calculationHistory = [];
 
 function resetCalculator() {
   calculator.firstOperand = null;
   calculator.operator = null;
   calculator.waitingForSecondOperand = false;
   calculator.hasError = false;
+  calculator.justCalculated = false;
+  calculator.lastOperation = null;
 
   currentInput = "";
 
@@ -28,6 +38,51 @@ function resetCalculator() {
   updateDisplay("0");
 }
 
+function startNewCalculationAfterResult() {
+  if (!calculator.justCalculated) return;
+
+  calculator.firstOperand = null;
+  calculator.operator = null;
+  calculator.waitingForSecondOperand = false;
+  calculator.justCalculated = false;
+  calculator.lastOperation = null;
+ 
+  currentInput = "";
+}
+
+function updateOperationPreview(){
+  if(!operationPreview) return
+
+  if (
+    calculator.firstOperand === null &&
+    calculator.operator === null &&
+    currentInput === ""
+  ) {
+    operationPreview.textContent = "No current operation.";
+    return;
+  }
+ 
+  operationPreview.textContent = `
+  ${calculator.firstOperand ?? currentInput}
+  ${calculator.operator ?? ""} 
+  ${calculator.waitingForSecondOperand ? currentInput : "" } 
+  ${calculator.lastOperation ? ` = ${calculator.lastOperation.result}` : "" }
+  `
+}
+function renderCalculationHistory(){
+  if(!calculationHistory) return;
+
+  calculationHistoryList.textContent = "";
+
+  calculationHistory.forEach((operation)=>{
+    const historyItem = document.createElement("li")
+
+    historyItem.textContent = `
+     ${operation.firstOperand} ${operation.operator} ${operation.secondOperand} = ${operation.result}
+    `;
+    calculationHistoryList.appendChild(historyItem);
+  })
+}
 
 function updateDisplay(value) {
   if (calcDisplay) {
@@ -36,15 +91,8 @@ function updateDisplay(value) {
     // (most recently typed) digits stay in view instead of the start.
     calcDisplay.scrollLeft = calcDisplay.scrollWidth;
   }
+  updateOperationPreview();
 }
-
-// function enableDecimalButton() {
-//   if (decimalBtn) decimalBtn.disabled = false;
-// }
-
-// function disableDecimalButton() {
-//   if (decimalBtn) decimalBtn.disabled = true;
-// }
 
 function setDecimalButtonEnabled(isEnabled){
   if (!decimalBtn) return;
@@ -52,6 +100,7 @@ function setDecimalButtonEnabled(isEnabled){
 }
 
 function handleDigit(number) {
+   startNewCalculationAfterResult();
     currentInput += number;
     updateDisplay(currentInput);
 }
@@ -85,7 +134,10 @@ function handleOperator(nextOperator){
       calculator.operator = nextOperator;
       currentInput = "";
       calculator.waitingForSecondOperand = true;
+      calculator.justCalculated = false;
+
       setDecimalButtonEnabled(true);
+      updateOperationPreview()
 }
 
 function calculate(){
@@ -100,6 +152,13 @@ function calculate(){
       );
 
     if (result === "ERROR") {
+        calculator.lastOperation = {
+        firstOperand: calculator.firstOperand,
+        operator: calculator.operator,
+        secondOperand,
+        result: SNARKY_DIVIDE_BY_ZERO,
+      };
+
       updateDisplay(SNARKY_DIVIDE_BY_ZERO);
       calculator.hasError = true;
       return;
@@ -109,15 +168,33 @@ function calculate(){
 
     updateDisplay(displayValue);
 
+   const completedOperation =  calculator.lastOperation = {
+      firstOperand: calculator.firstOperand,
+      operator: calculator.operator,
+      secondOperand,
+      result: displayValue,
+    };
+
+    updateOperationPreview()
+    calculator.lastOperation = completedOperation;
+    calculationHistory.push(completedOperation);
+
+    renderCalculationHistory();
+    
     calculator.firstOperand = Number(displayValue);
     calculator.operator = null;
     calculator.waitingForSecondOperand = false;
+    calculator.justCalculated = true;
+    calculator.lastOperation = null;
 
     currentInput = "";
     setDecimalButtonEnabled(true);
+
 }
 
 function inputDecimal(){
+  startNewCalculationAfterResult();
+
   if (currentInput.includes(".")) return;
 
   currentInput += currentInput === "" ? "0." : ".";
@@ -196,6 +273,26 @@ function initScrollButtons() {
 
 function initKeyboardInput() {
   document.addEventListener("keydown", function (event) {
+  
+   const isClearKey = event.key === "Escape";
+
+   const isCalculatorKey =
+      (event.key >= "0" && event.key <= "9") ||
+      event.key === "." ||
+      event.key === "+" ||
+      event.key === "-" ||
+      event.key === "*" ||
+      event.key === "/" ||
+      event.key === "Enter" ||
+      event.key === "=" ||
+      event.key === "Backspace" ||
+      event.key === "Escape";
+
+    if (!isCalculatorKey) return;
+
+    if (calculator.hasError && !isClearKey) {
+      resetCalculator();
+    }
 
       if (event.key >= "0" && event.key <= "9") {
           handleDigit(event.key);

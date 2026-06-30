@@ -1,3 +1,6 @@
+li {
+    list-style: none;
+}
 .container {
     display: flex;
     justify-content: center;
@@ -144,4 +147,33 @@
     letter-spacing: -0.02em;
     object-fit: cover;
 
+}
+
+.operation-overview{
+    max-height: 25rem;
+    max-width: 20rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: blanchedalmond;
+    overflow: scroll;
+}
+.calculation-history{
+    padding-left: 1rem;
+}
+@media screen and (max-width: 768px) {
+    .container{
+        flex-direction: column-reverse;
+    }
+    .operation-overview{
+        max-height: 10rem;
+        padding: 0.5rem;
+    }
+    .operation-overview-title{
+        margin: 1rem auto;
+    }
+    .calculation-history, .history-title, .current-operation-title, .operation-preview{
+        margin: 0.5rem;
+    }
+ 
+  
 }
