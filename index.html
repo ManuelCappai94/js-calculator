@@ -12,13 +12,41 @@
 
 <body>
     <main>
-        <div class="instructor">
-            <div class="stripes"></div>
-            <h3>READ ME FIRST!</h3>
-            <p><strong>On this calculator app, you can use the keyboard, to interact with the calculator.</strong></p>
-            <p><strong>Valid inputs, consist of digits from 0 to 9, and operator values such as:<br> " / " , " * " , " - " , " + " , " . " , " = " , " enter " , " backspace "</strong></p>
-            <div class="stripes"></div>
+        <div class="modal" id="instructionModal">
+            <div class="modal-content">
+
+                <button class="close-modal" aria-label="Close">&times;</button>
+
+                <div class="instructor">
+                    <div class="stripes"></div>
+
+                    <h3>READ ME FIRST!</h3>
+
+                    <p>
+                        <strong>
+                            On this calculator app, you can use the keyboard to interact with the calculator.
+                        </strong>
+                    </p>
+
+                    <p>
+                        <strong>
+                            Valid inputs consist of digits from 0 to 9 and the operators:
+                            <br>
+                            "/", "*", "-", "+", ".", "=", "Enter", "Backspace"
+                        </strong>
+                    </p>
+
+                    <div class="stripes"></div>
+                </div>
+
+            </div>
         </div>
+
+        <article>
+            <button id="instructionsBtn" type="button">
+                📖 Instructions
+            </button>
+        </article>
 
         <article class="calculator-container">
             <div class="calculator">
@@ -38,6 +66,7 @@
                         <button class="scrollBtn" data-scroll="left" type="button"
                             aria-label="scroll display left">&#8592;</button>
                     </div>
+
                     <div>
                         <button class="scrollBtn" data-scroll="right" type="button"
                             aria-label="scroll display right">&#8594;</button>

@@ -34,8 +34,46 @@ main {
     background-repeat: repeat;
 }
 
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #000;
+    color: #f8c928;
+
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
 .instructor {
- 
     text-align: center;
     /* max-height: 20rem; */
     height: fit-content;

@@ -15,6 +15,34 @@ const operatorIndicator = calcContainer.querySelector(".operator-indicator");
 
 const SNARKY_DIVIDE_BY_ZERO = "Can't divide by 0.";
 
+const modal = document.getElementById("instructionModal");
+const closeBtn = document.querySelector(".close-modal");
+const instructionsBtn = document.getElementById("instructionsBtn");
+
+function openModal() {
+  modal.classList.remove("hidden");
+}
+
+function closeModal() {
+  modal.classList.add("hidden");
+}
+
+// Show on page load
+window.addEventListener("load", openModal);
+
+// Open when clicking the Instructions button
+instructionsBtn.addEventListener("click", openModal);
+
+// Close button
+closeBtn.addEventListener("click", closeModal);
+
+// Close by clicking outside
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
 const calculator = {
   firstOperand: null,
   operator: null,
@@ -155,7 +183,7 @@ function handleOperator(nextOperator) {
 
 function calculate() {
   if (calculator.operator === null || currentInput === "") return;
-  
+
 
   const secondOperand = Number(currentInput);
 
